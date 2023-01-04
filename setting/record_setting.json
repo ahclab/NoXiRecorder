@@ -1,0 +1,25 @@
+{
+    "AVrecordeR":{
+        "recording_location": "Nara",
+        "video":{
+            "device": "Logitech StreamCam",
+            "fps": 25,
+            "frame_size": [1920, 1080],
+            "file_name": ".raw.mp4"
+        },
+        "audio_main":{
+            "device": "Yamaha AG03MK2",
+            "sample_rate": 16000,
+            "channels": 1,
+            "frames_per_buffer": 1024,
+            "file_name": "_main.raw.wav"
+        },
+        "audio_sub":{
+            "device": "Logitech StreamCam",
+            "sample_rate": 16000,
+            "channels": 1,
+            "frames_per_buffer": 1024,
+            "file_name": "_sub.raw.wav"
+        }
+    }
+}
