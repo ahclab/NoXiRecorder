@@ -78,7 +78,6 @@ class VideoRecorder:
 
 
 if __name__ == "__main__":
-    CAMERA_DEVICE = "Logitech StreamCam"
     # Determination of file name
     now = datetime.datetime.now()
     dirname = os.path.join(

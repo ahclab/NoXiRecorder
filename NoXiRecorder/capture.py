@@ -2,10 +2,8 @@ import cv2
 import os
 import numpy as np
 import argparse
-import getDeviceID
+from NoXiRecorder.utils.getDeviceID import get_camera_id
 import json
-
-CAMERA_DEVICE = "Logitech StreamCam"
 
 
 class VideoShow:
@@ -31,11 +29,11 @@ class VideoShow:
             ret, video_frame = self.video_cap.read()
             if ret == True:
                 if os.name == "nt":  # Windows
-                    frame = video_frame[y : y + h, x : x + w]
+                    frame = video_frame[y: y + h, x: x + w]
                     frame = cv2.flip(frame, 1)
                 else:  # Mac or Linux
                     blank = np.zeros((720, 1280, 3), np.uint8)
-                    frame = video_frame[y : y + h, x : x + w]
+                    frame = video_frame[y: y + h, x: x + w]
                     blank[0:720, 400:880] = frame
                     frame = cv2.flip(blank, 1)
                 cv2.imshow("screen", frame)
@@ -61,7 +59,7 @@ class VideoShow:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="")
     parser.add_argument(
-        "--capture_setting_path", default="setting/capture_setting.json"
+        "--capture_setting_path", default="NoXiRecorder/setting/capture_setting.json"
     )
     args = parser.parse_args()
 
@@ -69,18 +67,25 @@ if __name__ == "__main__":
     with open(args.capture_setting_path) as f:
         setting = json.load(f)
         video_device = setting["capture"]["device"]
+        device_id = setting["capture"]["id"]
         fps = setting["capture"]["fps"]
         frame_size = setting["capture"]["frame_size"]
 
-    video_device_id = getDeviceID.get_camera_id(video_device)
+    if os.name == "nt":  # Windows
+        video_device_id = device_id
+    else:
+        video_device_id = get_camera_id(video_device)
+
     if video_device_id == None:
         print(f"ERROR: Device not found ({video_device})")
-        exit(1)
+        video_device_id = device_id
+        # exit(1)
 
     print("------------------------------------")
     print("Capture Start...")
     print('If you want to end the capture, press the "e" key.')
-    video_capture = VideoShow(device=video_device_id, fps=fps, frame_size=frame_size)
+    video_capture = VideoShow(device=video_device_id,
+                              fps=fps, frame_size=frame_size)
     video_capture.start()
     video_capture.stop()
     print("Capture End...")

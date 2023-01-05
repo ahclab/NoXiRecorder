@@ -72,9 +72,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="")
     parser.add_argument("--num", default="01")
     parser.add_argument("--common_setting_path",
-                        default="setting/common_setting.json")
+                        default="NoXiRecorder/setting/common_setting.json")
     parser.add_argument("--record_setting_path",
-                        default="setting/record_setting.json")
+                        default="NoXiRecorder/setting/record_setting.json")
     args = parser.parse_args()
 
     # init
@@ -88,11 +88,13 @@ if __name__ == "__main__":
         location = setting["AVrecordeR"]["recording_location"]
 
         video_device = setting["AVrecordeR"]["video"]["device"]
+        video_id = setting["AVrecordeR"]["video"]["id"]
         fps = setting["AVrecordeR"]["video"]["fps"]
         frame_size = setting["AVrecordeR"]["video"]["frame_size"]
         video_file_name = setting["AVrecordeR"]["video"]["file_name"]
 
         audio_device_main = setting["AVrecordeR"]["audio_main"]["device"]
+        audio_id_main = setting["AVrecordeR"]["audio_main"]["id"]
         sample_rate_main = setting["AVrecordeR"]["audio_main"]["sample_rate"]
         channels_main = setting["AVrecordeR"]["audio_main"]["channels"]
         frames_per_buffer_main = setting["AVrecordeR"]["audio_main"][
@@ -101,6 +103,7 @@ if __name__ == "__main__":
         audio_file_name_main = setting["AVrecordeR"]["audio_main"]["file_name"]
 
         audio_device_sub = setting["AVrecordeR"]["audio_sub"]["device"]
+        audio_id_sub = setting["AVrecordeR"]["audio_sub"]["id"]
         sample_rate_sub = setting["AVrecordeR"]["audio_sub"]["sample_rate"]
         channels_sub = setting["AVrecordeR"]["audio_sub"]["channels"]
         frames_per_buffer_sub = setting["AVrecordeR"]["audio_sub"]["frames_per_buffer"]
@@ -143,9 +146,15 @@ if __name__ == "__main__":
 
     # Get device number
     logger.info("Get device number")
-    video_device_id = get_camera_id(video_device)
-    audio_device_id_main = get_audio_id(audio_device_main)
-    audio_device_id_sub = get_audio_id(audio_device_sub)
+    if os.name == "nt":  # Windows
+        video_device_id = video_id
+        audio_device_id_main = audio_id_main
+        audio_device_id_sub = audio_id_sub
+    else:
+        video_device_id = get_camera_id(video_device)
+        audio_device_id_main = get_audio_id(audio_device_main)
+        audio_device_id_sub = get_audio_id(audio_device_sub)
+
     logger.debug(f"Video Device: [{video_device_id}]{video_device}")
     logger.debug(
         f"Audio Device (MAIN): [{audio_device_id_main}]{audio_device_main}")
@@ -153,14 +162,17 @@ if __name__ == "__main__":
         f"Audio Device (SUB): [{audio_device_id_sub}]{audio_device_sub}")
 
     if video_device_id == None:
+        video_device_id = video_id
         logger.error(f"ERROR: Device not found ({video_device})")
-        exit(1)
+        # exit(1)
     if audio_device_id_main == None:
+        audio_device_id_main = audio_id_main
         logger.error(f"ERROR: Device not found ({audio_device_main})")
-        exit(1)
+        # exit(1)
     if audio_device_id_sub == None:
+        audio_device_id_sub = audio_id_sub
         logger.error(f"ERROR: Device not found ({audio_device_sub})")
-        exit(1)
+        # exit(1)
     logger.debug("Successfully obtained device number")
 
     # Recording

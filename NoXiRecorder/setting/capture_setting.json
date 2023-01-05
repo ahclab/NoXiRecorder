@@ -1,7 +1,11 @@
 {
-    "capture":{
+    "capture": {
         "device": "Logitech StreamCam",
+        "id": 0,
         "fps": 30,
-        "frame_size": [1920, 1080]
+        "frame_size": [
+            1920,
+            1080
+        ]
     }
 }
