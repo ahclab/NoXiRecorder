@@ -1,0 +1,13 @@
+{
+    "video":{
+        "device": "Logitech StreamCam",
+        "fps": 30,
+        "frame_size": [320, 240]
+    },
+    "audio":{
+        "device": "Yamaha AG03MK2",
+        "sample_rate": 16000,
+        "channels": 1,
+        "frames_per_buffer": 1024
+    }
+}

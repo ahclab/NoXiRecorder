@@ -1,0 +1,6 @@
+2023-01-05 15:36:32,815@ __main__ [INFO] <module>: Start logger
+2023-01-05 15:36:32,818@ __main__ [INFO] <module>: Get device number
+2023-01-05 15:36:35,235@ __main__ [DEBUG] <module>: Video Device: [None]Logitech StreamCam
+2023-01-05 15:36:35,235@ __main__ [DEBUG] <module>: Audio Device (MAIN): [None]Yamaha AG03MK2
+2023-01-05 15:36:35,235@ __main__ [DEBUG] <module>: Audio Device (SUB): [None]Logitech StreamCam
+2023-01-05 15:36:35,235@ __main__ [ERROR] <module>: ERROR: Device not found (Logitech StreamCam)
