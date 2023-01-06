@@ -1,34 +1,34 @@
 {
-    "record":{
+    "record": {
         "bufsize": 4096,
-        "expert":{
-            "ip": "0.0.0.0",
+        "expert": {
+            "ip": "169.254.220.99",
             "port": 50001
         },
-        "novice":{
-            "ip": "0.0.0.0",
+        "novice": {
+            "ip": "169.254.220.99",
             "port": 50002
         }
     },
-    "monitor":{
+    "monitor": {
         "bufsize": 23040,
-        "expert":{
-            "video":{
-                "ip": "0.0.0.0",
+        "expert": {
+            "video": {
+                "ip": "localhost",
                 "port": 50003
             },
-            "audio":{
-                "ip": "0.0.0.0",
+            "audio": {
+                "ip": "localhost",
                 "port": 50004
             }
         },
-        "novice":{
-            "video":{
-                "ip": "0.0.0.0",
+        "novice": {
+            "video": {
+                "ip": "localhost",
                 "port": 50005
             },
-            "audio":{
-                "ip": "0.0.0.0",
+            "audio": {
+                "ip": "localhost",
                 "port": 50006
             }
         }

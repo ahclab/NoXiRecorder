@@ -56,8 +56,8 @@ class VideoRecorder:
             time.sleep(0.01)
             if ret == True:
                 self.process.stdin.write(video_frame)  # write
-                if os.name == "nt":  # Windows
-                    cv2.imshow("screen", video_frame)
+                # if os.name == "nt":  # Windows
+                #     cv2.imshow("screen", video_frame)
             else:
                 break
 

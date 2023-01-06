@@ -3,6 +3,7 @@ from typing import Optional
 import json
 import pyaudio
 import platform
+import cv2
 
 # Lists index and name of connected devices
 
