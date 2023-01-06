@@ -6,7 +6,7 @@ import argparse
 import threading
 import datetime
 import NoXiRecorder.utils.utils as utils
-from NoXiRecorder.utils.utils import file_manager, command
+from NoXiRecorder.utils.utils import file_manager
 
 # Audio record
 
