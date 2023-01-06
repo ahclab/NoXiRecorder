@@ -15,4 +15,6 @@ pynput==1.7.6
 python-ffmpeg==1.0.16
 rich==13.0.0
 six==1.16.0
-typing_extensions==4.4.0
+typing_extensions==4.4.0i
+pyqt5==5.12.3
+pyqtwebengine==5.12.1
