@@ -1,4 +1,5 @@
 from setuptools import setup, find_packages
+print("aaa")
 
 setup(
     name='noxirecorder',
