@@ -58,7 +58,7 @@ python NoXiRecorder/client.py
 ##### Command
   - **time**: Check the current time
   - **ready**: Confirmation of communication status
-  - **set option**: Setting Options
+  - **set option**: Setting Options  
     ex.) `--num 01`
   - **cat option**: Display of currently set options
   - **record**: Launch AVrecordeR
