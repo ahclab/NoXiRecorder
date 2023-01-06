@@ -13,7 +13,6 @@ pyee==9.0.4
 Pygments==2.14.0
 pynput==1.7.6
 pyobjc==9.0.1
-pyobjc-core==9.0.1
 python-ffmpeg==1.0.16
 rich==13.0.0
 six==1.16.0
