@@ -81,7 +81,8 @@ if __name__ == "__main__":
     parser.add_argument(
         "--monitor_setting_path", default="setting/monitor_setting.json"
     )
-    parser.add_argument("--common_setting_path", default="setting/common_setting.json")
+    parser.add_argument("--common_setting_path",
+                        default="setting/common_setting.json")
     args = parser.parse_args()
 
     # init

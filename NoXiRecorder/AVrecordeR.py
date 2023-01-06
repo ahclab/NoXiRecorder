@@ -14,7 +14,8 @@ from NoXiRecorder.utils.getDeviceID import get_audio_id, get_camera_id
 from NoXiRecorder.utils.fileFormatting import cut_to_same_length
 from NoXiRecorder.recorder.videoRecorder import VideoRecorder
 from NoXiRecorder.recorder.audioRecorder import AudioRecorder
-from NoXiRecorder.utils.utils import file_manager, command
+import NoXiRecorder.utils.utils as utils
+from NoXiRecorder.utils.utils import file_manager
 
 # Displays information on recorded files
 
@@ -206,14 +207,14 @@ if __name__ == "__main__":
     logger.debug("Thread startup complete")
     logger.info('If you want to start the AV record, press the "s" key.')
 
-    while command != "s":
-        command = input(">>")
+    while utils.command != "s":
+        utils.command = input(">>")
         time.sleep(0.01)
 
     logger.info('If you want to stop the AV record, press the "e" key.')
 
-    while command != "e":
-        command = input(">>")
+    while utils.command != "e":
+        utils.command = input(">>")
         time.sleep(0.03)
 
     video_thread.stop()

@@ -1,0 +1,57 @@
+2023-01-06 11:32:56,691@ __main__ [INFO] <module>: Start logger
+2023-01-06 11:32:56,693@ __main__ [INFO] <module>: Get device number
+2023-01-06 11:33:00,124@ __main__ [DEBUG] <module>: Video Device: [None]Logitech StreamCam
+2023-01-06 11:33:00,124@ __main__ [DEBUG] <module>: Audio Device (MAIN): [None]Yamaha AG03MK2
+2023-01-06 11:33:00,125@ __main__ [DEBUG] <module>: Audio Device (SUB): [None]Logitech StreamCam
+2023-01-06 11:33:00,125@ __main__ [ERROR] <module>: ERROR: Device not found (Logitech StreamCam)
+2023-01-06 11:33:00,126@ __main__ [ERROR] <module>: ERROR: Device not found (Yamaha AG03MK2)
+2023-01-06 11:33:00,126@ __main__ [ERROR] <module>: ERROR: Device not found (Logitech StreamCam)
+2023-01-06 11:33:00,127@ __main__ [DEBUG] <module>: Successfully obtained device number
+2023-01-06 11:33:00,127@ __main__ [INFO] <module>: AV Record Start...
+2023-01-06 11:33:00,151@ __main__ [DEBUG] <module>: AudioRecorder (MAIN) is ready
+2023-01-06 11:33:00,156@ __main__ [DEBUG] <module>: AudioRecorder (SUB) is ready
+2023-01-06 11:33:01,134@ __main__ [DEBUG] <module>: VideoRecorder is ready
+2023-01-06 11:33:01,198@ __main__ [DEBUG] <module>: Thread startup complete
+2023-01-06 11:33:01,217@ __main__ [INFO] <module>: If you want to start the AV record, press the "s" key.
+2023-01-06 11:33:08,574@ __main__ [INFO] <module>: If you want to stop the AV record, press the "e" key.
+2023-01-06 11:33:13,512@ __main__ [DEBUG] <module>: Stopping Threads
+2023-01-06 11:33:13,512@ __main__ [INFO] <module>: AV Record End...
+2023-01-06 11:33:13,520@ __main__ [INFO] <module>: Display of recording results
+2023-01-06 11:33:13,522@ __main__ [INFO] results: Recorded Video: Nara/01_2023_01_06/01_expert.raw.mp4
+2023-01-06 11:33:13,568@ __main__ [DEBUG] results: width: 1920.0
+2023-01-06 11:33:13,568@ __main__ [DEBUG] results: height: 1080.0
+2023-01-06 11:33:13,568@ __main__ [DEBUG] results: fps: 24.752475247524753
+2023-01-06 11:33:13,568@ __main__ [DEBUG] results: frame_count: 100.0
+2023-01-06 11:33:13,568@ __main__ [DEBUG] results: length: 4.04 s
+2023-01-06 11:33:13,568@ __main__ [DEBUG] results: fourcc: avc1
+2023-01-06 11:33:13,569@ __main__ [INFO] results: Recorded Audio: Nara/01_2023_01_06/01_expert_main.raw.wav
+2023-01-06 11:33:13,570@ __main__ [DEBUG] results: channel: 1
+2023-01-06 11:33:13,570@ __main__ [DEBUG] results: sample size: 2
+2023-01-06 11:33:13,570@ __main__ [DEBUG] results: fps: 16000
+2023-01-06 11:33:13,570@ __main__ [DEBUG] results: frame_count: 63488
+2023-01-06 11:33:13,571@ __main__ [DEBUG] results: length: 3.968
+2023-01-06 11:33:13,571@ __main__ [INFO] results: Recorded Audio: Nara/01_2023_01_06/01_expert_sub.raw.wav
+2023-01-06 11:33:13,572@ __main__ [DEBUG] results: channel: 1
+2023-01-06 11:33:13,572@ __main__ [DEBUG] results: sample size: 2
+2023-01-06 11:33:13,572@ __main__ [DEBUG] results: fps: 16000
+2023-01-06 11:33:13,572@ __main__ [DEBUG] results: frame_count: 63488
+2023-01-06 11:33:13,572@ __main__ [DEBUG] results: length: 3.968
+2023-01-06 11:33:13,572@ __main__ [DEBUG] <module>: Start time of video_thread: 2023-01-06 11:33:08.561614
+2023-01-06 11:33:13,572@ __main__ [DEBUG] <module>: Start time of video_thread: 2023-01-06 11:33:12.564941
+2023-01-06 11:33:13,572@ __main__ [DEBUG] <module>: Start time of audio_thread_mic: 2023-01-06 11:33:08.561583
+2023-01-06 11:33:13,572@ __main__ [DEBUG] <module>: Start time of audio_thread_mic: 2023-01-06 11:33:12.612469
+2023-01-06 11:33:13,572@ __main__ [DEBUG] <module>: Start time of audio_thread_kinect: 2023-01-06 11:33:08.561654
+2023-01-06 11:33:13,572@ __main__ [DEBUG] <module>: Start time of audio_thread_kinect: 2023-01-06 11:33:12.612543
+2023-01-06 11:33:13,572@ __main__ [INFO] <module>: File Formatting...
+2023-01-06 11:33:13,649@ __main__ [DEBUG] cut_to_same_length: raw file length: [Nara/01_2023_01_06/01_expert.raw.mp4] [4.04]
+2023-01-06 11:33:13,650@ __main__ [DEBUG] cut_to_same_length: raw file length: [Nara/01_2023_01_06/01_expert_sub.raw.wav] [3.968]
+2023-01-06 11:33:13,650@ __main__ [DEBUG] cut_to_same_length: raw file length: [Nara/01_2023_01_06/01_expert_main.raw.wav] [3.968]
+2023-01-06 11:33:13,650@ __main__ [DEBUG] cut_to_same_length: ffmpeg -y -ss 0.07200000000000006 -i Nara/01_2023_01_06/01_expert.raw.mp4 -c copy Nara/01_2023_01_06/01_expert.mp4
+2023-01-06 11:33:13,718@ __main__ [DEBUG] cut_to_same_length: ffmpeg -y -ss 0.0 -i Nara/01_2023_01_06/01_expert_sub.raw.wav -c copy Nara/01_2023_01_06/01_expert_sub.wav
+2023-01-06 11:33:13,792@ __main__ [DEBUG] cut_to_same_length: ffmpeg -y -ss 0.0 -i Nara/01_2023_01_06/01_expert_main.raw.wav -c copy Nara/01_2023_01_06/01_expert_main.wav
+2023-01-06 11:33:13,852@ __main__ [DEBUG] cut_to_same_length: ffmpeg -ac 2 -y -channel_layout stereo -i Nara/01_2023_01_06/01_expert_main.wav -i Nara/01_2023_01_06/01_expert.mp4 -pix_fmt yuv420p Nara/01_2023_01_06/01_expert.withAudio.mp4
+2023-01-06 11:33:15,230@ __main__ [DEBUG] cut_to_same_length: ffmpeg -ac 2 -y -channel_layout stereo -i Nara/01_2023_01_06/01_expert_main.wav -i Nara/01_2023_01_06/01_expert.mp4 -vf scale=320:-1 -pix_fmt yuv420p Nara/01_2023_01_06/01_expert.withAudio_low.mp4
+2023-01-06 11:33:15,539@ __main__ [DEBUG] cut_to_same_length: formatted file length: [Nara/01_2023_01_06/01_expert.mp4] [3.968]
+2023-01-06 11:33:15,540@ __main__ [DEBUG] cut_to_same_length: formatted file length: [Nara/01_2023_01_06/01_expert_sub.wav] [3.968]
+2023-01-06 11:33:15,540@ __main__ [DEBUG] cut_to_same_length: formatted file length: [Nara/01_2023_01_06/01_expert_main.wav] [3.968]
+2023-01-06 11:33:15,540@ __main__ [INFO] <module>: End

@@ -5,6 +5,7 @@ import os
 import numpy as np
 import ffmpeg
 import datetime
+import NoXiRecorder.utils.utils as utils
 from NoXiRecorder.utils.utils import file_manager, command
 
 # Video record
@@ -44,11 +45,11 @@ class VideoRecorder:
     # Video starts being recorded
     def record(self):
         while True:
-            if command == "s":  # start
+            if utils.command == "s":  # start
                 break
         self.start_time = datetime.datetime.now()
         while self.video_cap.isOpened():  # end
-            if command == "e":
+            if utils.command == "e":
                 self.end_time = datetime.datetime.now()
                 break
             ret, video_frame = self.video_cap.read()  # read
@@ -98,12 +99,12 @@ if __name__ == "__main__":
     )
     video_thread.start()
     print('If you want to start the AV record, press the "s" key.')
-    while command != "s":
-        command = input(">>")
+    while utils.command != "s":
+        utils.command = input(">>")
         time.sleep(0.01)
     print('If you want to end the video record, press the "e" key.')
-    while command != "e":
-        command = input(">>")
+    while utils.command != "e":
+        utils.command = input(">>")
         time.sleep(0.03)
     video_thread.stop()
     print("Video Record End...")

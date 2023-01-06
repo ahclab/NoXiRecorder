@@ -5,6 +5,7 @@ import time
 import argparse
 import threading
 import datetime
+import NoXiRecorder.utils.utils as utils
 from NoXiRecorder.utils.utils import file_manager, command
 
 # Audio record
@@ -49,7 +50,7 @@ class AudioRecorder:
 
     def callback(self, in_data, frame_count, time_info, status_flags):
         self.audio_frames.append(in_data)
-        if command == "e":  # end
+        if utils.command == "e":  # end
             self.end_time = datetime.datetime.now()
             return None, pyaudio.paComplete
         return None, pyaudio.paContinue
@@ -57,7 +58,7 @@ class AudioRecorder:
     # Audio starts being recorded
     def record(self):
         while True:
-            if command == "s":  # start
+            if utils.command == "s":  # start
                 break
         self.start_time = datetime.datetime.now()
         self.stream.start_stream()  # record
@@ -104,12 +105,12 @@ if __name__ == "__main__":
     )
     audio_thread.start()
     print('If you want to start the AV record, press the "s" key.')
-    while command != "s":
-        command = input(">>")
+    while utils.command != "s":
+        utils.command = input(">>")
         time.sleep(0.01)
     print('If you want to stop the AV record, press the "e" key.')
-    while command != "e":
-        command = input(">>")
+    while utils.command != "e":
+        utils.command = input(">>")
         time.sleep(0.03)
     audio_thread.stop()
     print("Audio Record End...")

@@ -6,7 +6,8 @@ import json
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="")
-    parser.add_argument("--setting_path", default="setting/network_setting.json")
+    parser.add_argument(
+        "--setting_path", default="NoXirecorder/setting/network_setting.json")
     args = parser.parse_args()
 
     # init
@@ -17,7 +18,8 @@ if __name__ == "__main__":
         for user in ["expert", "novice"]:
             try:
                 client.connect(
-                    (setting["record"][user]["ip"], setting["record"][user]["port"])
+                    (setting["record"][user]["ip"],
+                     setting["record"][user]["port"])
                 )
             except:
                 print(f"Unable to connect ({user})")

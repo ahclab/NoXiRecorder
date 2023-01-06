@@ -66,7 +66,8 @@ class Monitor:
                 packet_size = int(frame_size[0] * frame_size[1] * 3 / n)
                 for i in range(n):
                     self.client_video.sendall(
-                        video_frame_byte[i * packet_size : (i + 1) * packet_size]
+                        video_frame_byte[i *
+                                         packet_size: (i + 1) * packet_size]
                     )  # send
                 self.client_video.sendall(b"e")  # send
                 time.sleep(0.2)  # fps5
@@ -92,12 +93,13 @@ class Monitor:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="")
-    parser.add_argument("--common_setting_path", default="setting/common_setting.json")
+    parser.add_argument("--common_setting_path",
+                        default="NoXiRecorder/setting/common_setting.json")
     parser.add_argument(
-        "--monitor_setting_path", default="setting/monitor_setting.json"
+        "--monitor_setting_path", default="NoXiRecorder/setting/monitor_setting.json"
     )
     parser.add_argument(
-        "--network_setting_path", default="setting/network_setting.json"
+        "--network_setting_path", default="NoXiRecorder/setting/network_setting.json"
     )
     args = parser.parse_args()
 
@@ -109,10 +111,12 @@ if __name__ == "__main__":
     with open(args.monitor_setting_path) as f:
         setting = json.load(f)
         video_device = setting["video"]["device"]
+        video_id = setting["video"]["id"]
         fps = setting["video"]["fps"]
         frame_size = setting["video"]["frame_size"]
 
         audio_device = setting["audio"]["device"]
+        audio_id = setting["audio"]["id"]
         sample_rate = setting["audio"]["sample_rate"]
         channels = setting["audio"]["channels"]
         frames_per_buffer = setting["audio"]["frames_per_buffer"]
@@ -143,14 +147,19 @@ if __name__ == "__main__":
     print(f"[white]{client_video}[/white]")
     print(f"[white]{client_audio}[/white]")
 
-    video_device_id = getDeviceID.get_camera_id(video_device)
+    if os.name == "nt":  # Windows
+        video_device_id = video_id
+        audio_device_id = audio_id
+    else:
+        video_device_id = getDeviceID.get_camera_id(video_device)
+        audio_device_id = getDeviceID.get_audio_id(audio_device)
+
     if video_device_id == None:
+        video_device_id = video_id
         print(f"ERROR: Device not found ({video_device})")
-        exit(1)
-    audio_device_id = getDeviceID.get_audio_id(audio_device)
     if audio_device_id == None:
+        audio_device_id = audio_id
         print(f"ERROR: Device not found ({audio_device})")
-        exit(1)
 
     print("------------------------------------")
     print("Monitor Start...")

@@ -49,20 +49,24 @@ def cut_to_same_length(path_video, path_audio_main, path_audio_sub, logger=None)
     min_length = min(length_list)
     for path, length in zip(path_list, length_list):
         duration = length - min_length  # Time gap between audio and video files
-        cmd = f"ffmpeg -y -ss {duration} -i {path} -c copy {path.replace('.raw', '')}"  # All formatted to the same file length
+        # All formatted to the same file length
+        cmd = f"ffmpeg -y -ss {duration} -i {path} -c copy {path.replace('.raw', '')}"
         logger.debug(cmd)
         subprocess.call(cmd.split())
 
-    cmd = f"ffmpeg -ac 2 -y -channel_layout stereo -i {path_audio_main.replace('.raw', '')} -i {path_video.replace('.raw', '')} -pix_fmt yuv420p {path_video.replace('.raw', '.withAudio')}"  # Composite audio and video
+    # Composite audio and video
+    cmd = f"ffmpeg -ac 2 -y -channel_layout stereo -i {path_audio_main.replace('.raw', '')} -i {path_video.replace('.raw', '')} -pix_fmt yuv420p {path_video.replace('.raw', '.withAudio')}"
     logger.debug(cmd)
     subprocess.call(cmd.split())
-    cmd = f"ffmpeg -ac 2 -y -channel_layout stereo -i {path_audio_main.replace('.raw', '')} -i {path_video.replace('.raw', '')} -vf scale=320:-1 -pix_fmt yuv420p {path_video.replace('.raw', '.withAudio_low')}"  # Composite audio and video in low quality
+    # Composite audio and video in low quality
+    cmd = f"ffmpeg -ac 2 -y -channel_layout stereo -i {path_audio_main.replace('.raw', '')} -i {path_video.replace('.raw', '')} -vf scale=320:-1 -pix_fmt yuv420p {path_video.replace('.raw', '.withAudio_low')}"
     logger.debug(cmd)
     subprocess.call(cmd.split())
 
     for path in path_list:
         length = get_file_length(path.replace(".raw", ""))
-        logger.debug(f"formatted file length: [{path.replace('.raw', '')}] [{length}]")
+        logger.debug(
+            f"formatted file length: [{path.replace('.raw', '')}] [{length}]")
 
 
 if __name__ == "__main__":

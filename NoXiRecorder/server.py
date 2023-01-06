@@ -7,9 +7,10 @@ import json
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="")
-    parser.add_argument("--common_setting_path", default="setting/common_setting.json")
+    parser.add_argument("--common_setting_path",
+                        default="NoXirecorder/setting/common_setting.json")
     parser.add_argument(
-        "--network_setting_path", default="setting/network_setting.json"
+        "--network_setting_path", default="NoXirecorder/setting/network_setting.json"
     )
     args = parser.parse_args()
 
@@ -69,41 +70,47 @@ if __name__ == "__main__":
             client.sendall(f"{HEADER} {option}".encode("utf-8"))
 
         elif data.decode("UTF-8") == "record":  # Execution of the recording program
-            client.sendall(f"{HEADER} Launch the recording program".encode("utf-8"))
+            client.sendall(
+                f"{HEADER} Launch the recording program".encode("utf-8"))
             if option == None:
                 recorder = subprocess.Popen(
-                    f"python AVrecordeR.py",
+                    f"python NoXiRecorder/AVrecordeR.py",
                     shell=True,
                     stdin=subprocess.PIPE,
                 )
             else:
                 recorder = subprocess.Popen(
-                    f"python AVrecordeR.py {option}",
+                    f"python NoXiRecorder/AVrecordeR.py {option}",
                     shell=True,
                     stdin=subprocess.PIPE,
                 )
         elif data.decode("UTF-8") == "start":
             if recorder == None:
                 client.sendall(
-                    f"{HEADER} Recording program is not launch.".encode("utf-8")
+                    f"{HEADER} Recording program is not launch.".encode(
+                        "utf-8")
                 )
             else:
                 start_flag = True
-                client.sendall(f"{HEADER} Start AV Recording Program".encode("utf-8"))
+                client.sendall(
+                    f"{HEADER} Start AV Recording Program".encode("utf-8"))
                 recorder.stdin.write("s\n".encode("utf-8"))
                 recorder.stdin.flush()
         elif data.decode("UTF-8") == "end":
             if recorder == None:
                 client.sendall(
-                    f"{HEADER} Recording program is not launch.".encode("utf-8")
+                    f"{HEADER} Recording program is not launch.".encode(
+                        "utf-8")
                 )
             elif not start_flag:
                 client.sendall(
                     f"{HEADER} Recording program is not start.".encode("utf-8")
                 )
             else:
-                client.sendall(f"{HEADER} End AV Recording program".encode("utf-8"))
+                client.sendall(
+                    f"{HEADER} End AV Recording program".encode("utf-8"))
                 recorder.stdin.write("e\n".encode("utf-8"))
                 recorder.stdin.flush()
         else:
-            client.sendall(f"{HEADER} The command is not provided.".encode("utf-8"))
+            client.sendall(
+                f"{HEADER} The command is not provided.".encode("utf-8"))
