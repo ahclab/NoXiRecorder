@@ -1,3 +1,5 @@
+pyqt5==5.12.3
+pyqtwebengine==5.12.1
 commonmark==0.9.1
 ffmpeg-python==0.2.0
 future==0.18.2
@@ -15,6 +17,4 @@ pynput==1.7.6
 python-ffmpeg==1.0.16
 rich==13.0.0
 six==1.16.0
-typing_extensions==4.4.0i
-pyqt5==5.12.3
-pyqtwebengine==5.12.1
+typing_extensions==4.4.0
