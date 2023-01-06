@@ -8,27 +8,75 @@ from rich import print
 import pyaudio
 import json
 import threading
+import NoXiRecorder.utils.utils as utils
 
 
-class VideoAudioSend:
+class VideoSend:
     def __init__(
         self,
         video_device,
         fps,
         frame_size,
+        client,
+    ):
+        self.open = True
+        self.width = frame_size[0]
+        self.height = frame_size[1]
+
+        self.video_cap = cv2.VideoCapture(video_device)
+        self.video_cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.width)
+        self.video_cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.height)
+        self.video_cap.set(cv2.CAP_PROP_FPS, fps)
+
+        self.client = client
+        self.n = 10
+
+    # Monitor starts being captured
+    def monitor(self):
+        while self.open == True:
+            ret, video_frame = self.video_cap.read()
+            if ret == True:
+                video_frame_byte = (
+                    video_frame.tobytes()
+                )  # Convert from numpy matrix to byte data
+                try:
+                    self.client.sendall(b"s")  # send
+                    packet_size = int(self.width * self.height * 3 / self.n)
+                    for i in range(self.n):
+                        self.client.sendall(
+                            video_frame_byte[i * packet_size : (i + 1) * packet_size]
+                        )  # send
+                    self.client.sendall(b"e")  # send
+                    time.sleep(0.2)  # fps5
+                except:
+                    break
+            else:
+                break
+
+    # Finishes the monitor
+    def stop(self):
+        if self.open == True:
+            self.open = False
+            self.video_cap.release()
+            cv2.destroyAllWindows()
+        else:
+            pass
+
+    # Launches the monitor function
+    def start(self):
+        self.monitor()
+
+
+class AudioSend:
+    def __init__(
+        self,
         audio_device,
         sample_rate,
         channels,
         frames_per_buffer,
-        client_video,
-        client_audio,
+        client,
     ):
         self.open = True
-
-        self.video_cap = cv2.VideoCapture(video_device)
-        self.video_cap.set(cv2.CAP_PROP_FRAME_WIDTH, frame_size[0])
-        self.video_cap.set(cv2.CAP_PROP_FRAME_HEIGHT, frame_size[1])
-        self.video_cap.set(cv2.CAP_PROP_FPS, fps)
 
         self.audio = pyaudio.PyAudio()
         self.stream = self.audio.open(
@@ -41,12 +89,11 @@ class VideoAudioSend:
             stream_callback=self.callback,
         )
 
-        self.client_video = client_video
-        self.client_audio = client_audio
+        self.client = client
 
     def callback(self, in_data, frame_count, time_info, status):
         try:
-            self.client_audio.send(in_data)  # send
+            self.client.send(in_data)  # send
             return (None, pyaudio.paContinue)
         except:
             return (None, pyaudio.paComplete)
@@ -55,25 +102,6 @@ class VideoAudioSend:
     def monitor(self):
         self.stream.start_stream()
 
-        while self.open == True:
-            ret, video_frame = self.video_cap.read()
-            if ret == True:
-                video_frame_byte = (
-                    video_frame.tobytes()
-                )  # Convert from numpy matrix to byte data
-                self.client_video.sendall(b"s")  # send
-                n = 10
-                packet_size = int(frame_size[0] * frame_size[1] * 3 / n)
-                for i in range(n):
-                    self.client_video.sendall(
-                        video_frame_byte[i *
-                                         packet_size: (i + 1) * packet_size]
-                    )  # send
-                self.client_video.sendall(b"e")  # send
-                time.sleep(0.2)  # fps5
-            else:
-                break
-
     # Finishes the monitor
     def stop(self):
         if self.open == True:
@@ -81,8 +109,6 @@ class VideoAudioSend:
             self.stream.stop_stream()
             self.stream.close()
             self.audio.terminate()
-            self.video_cap.release()
-            cv2.destroyAllWindows()
         else:
             pass
 
@@ -106,6 +132,8 @@ class AudioMonitor:
 
     def monitor(self):
         while True:
+            if utils.command == "e":
+                break
             data = self.client.recv(self.bufsize)
             self.stream.write(data)
 

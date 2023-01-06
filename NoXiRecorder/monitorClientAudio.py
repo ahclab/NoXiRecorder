@@ -20,8 +20,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--monitor_setting_path", default="NoXiRecorder/setting/monitor_setting.json"
     )
-    parser.add_argument("--monitor_user",
-                        default="expert")
+    parser.add_argument("--monitor_user", default="expert")
     args = parser.parse_args()
 
     # init
@@ -55,11 +54,12 @@ if __name__ == "__main__":
 
     thread_audio.start()
 
-    while utils.command != "e":
+    while thread_audio.stream.is_active():
         utils.command = input(">>")
-        time.sleep(0.03)
+        if utils.command == "e":
+            break
+        time.sleep(0.1)
 
+    time.sleep(1)
     thread_audio.stop()
-
-    time.sleep(2)
     client_audio.close()

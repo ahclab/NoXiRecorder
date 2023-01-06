@@ -7,7 +7,7 @@ import pyaudio
 import argparse
 import json
 import threading
-import utils
+import NoXiRecorder.utils.utils as utils
 
 from NoXiRecorder.monitor.monitor import VideoMonitor
 
@@ -20,8 +20,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--monitor_setting_path", default="NoXiRecorder/setting/monitor_setting.json"
     )
-    parser.add_argument("--monitor_user",
-                        default="expert")
+    parser.add_argument("--monitor_user", default="expert")
     args = parser.parse_args()
 
     # init
@@ -49,7 +48,7 @@ if __name__ == "__main__":
         bufsize=BUFSIZE,
     )
     thread_video.start()
-    thread_video.stop()
 
     time.sleep(2)
+    thread_video.stop()
     client_video.close()
