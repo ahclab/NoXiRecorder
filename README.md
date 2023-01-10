@@ -45,6 +45,17 @@ python NoXiRecorder/capture.py
 ```
 
 ### Recorder
+#### Recording on a single PC
+```bash
+python NoXiRecorder/AVrecorder.py
+```
+If you get "AttributeError: module 'ffmpeg' has no attribute 'input'", please execute the following command.  
+`pip uninstall python-ffmpge ffmpeg-python`  
+`pip install ffmpeg-python`
+
+If you get an "Invalid buffer size error", please review the settings file.
+
+#### Synchronized recording of two PCs
 #### Server PC (expert/novice)
 ```bash
 python NoXiRecorder/server.py
