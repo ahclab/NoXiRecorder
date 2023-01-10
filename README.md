@@ -56,17 +56,17 @@ If you get "AttributeError: module 'ffmpeg' has no attribute 'input'", please ex
 If you get an "Invalid buffer size error", please review the settings file.
 
 #### Synchronized recording of two PCs
-#### Server PC (expert/novice)
+##### Server PC (expert/novice)
 ```bash
 python NoXiRecorder/server.py
 ```
 
-#### Client PC (observer)
+##### Client PC (observer)
 ```bash
 python NoXiRecorder/client.py
 ```
 
-##### Command
+###### Command
   - **time**: Check the current time
   - **ready**: Confirmation of communication status
   - **set option**: Setting Options  
