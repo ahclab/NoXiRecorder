@@ -67,3 +67,22 @@ python NoXiRecorder/client.py
   - **exit**: Disconnection of communication and program termination
 
 ### Monitor
+#### 1. Server PC (expert)
+```bash
+python NoXiRecorder/monitorServerAudio.py
+python NoXiRecorder/monitorServerVideo.py
+```
+
+#### 2. Server PC (novice)
+```bash
+python NoXiRecorder/monitorServerAudio.py
+python NoXiRecorder/monitorServerVideo.py
+```
+
+#### 2. Client PC (observer)
+```bash
+python NoXiRecorder/monitorClientAudio.py --monitor_user expert
+python NoXiRecorder/monitorClientVideo.py --monitor_user expert
+python NoXiRecorder/monitorClientAudio.py --monitor_user novice
+python NoXiRecorder/monitorClientVideo.py --monitor_user novice
+```
