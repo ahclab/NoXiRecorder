@@ -28,14 +28,10 @@ class VideoShow:
         while self.open == True:
             ret, video_frame = self.video_cap.read()
             if ret == True:
-                if os.name == "nt":  # Windows
-                    frame = video_frame[y: y + h, x: x + w]
-                    frame = cv2.flip(frame, 1)
-                else:  # Mac or Linux
-                    blank = np.zeros((720, 1280, 3), np.uint8)
-                    frame = video_frame[y: y + h, x: x + w]
-                    blank[0:720, 400:880] = frame
-                    frame = cv2.flip(blank, 1)
+                blank = np.zeros((720, 1280, 3), np.uint8)
+                frame = video_frame[y: y + h, x: x + w]
+                blank[0:720, 400:880] = frame
+                frame = cv2.flip(blank, 1)
                 cv2.imshow("screen", frame)
                 if cv2.waitKey(1) & 0xFF == ord("e"):
                     break

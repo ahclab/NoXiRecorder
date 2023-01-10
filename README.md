@@ -38,17 +38,23 @@ This is only valid for macOS and will not work on Windows due to system reasons.
 This ID will be used if the device name is not found or if Windows is used.
   - **ip**: Please enter ip address for server.
 
+### Allow network traffic for security software
+If network traffic is limited by security software, communication between computers is not possible.  
+Be sure to turn it off.
+
 ## Run
 ### Capture
 ```bash
 python NoXiRecorder/capture.py
 ```
+To end capture, press "e" on the capture screen.  
 
 ### Recorder
 #### Recording on a single PC
 ```bash
 python NoXiRecorder/AVrecorder.py
 ```
+Press "s" to start record, "e" to end record.  
 If you get "AttributeError: module 'ffmpeg' has no attribute 'input'", please execute the following command.  
 `pip uninstall python-ffmpge ffmpeg-python`  
 `pip install ffmpeg-python`
