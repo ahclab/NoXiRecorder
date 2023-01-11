@@ -2,7 +2,7 @@
     "AVrecordeR": {
         "recording_location": "Nara",
         "video": {
-            "device": "Azure Kinect 4K Camera",
+            "device": "Azure Kinect",
             "id": 1,
             "fps": 25,
             "frame_size": [
@@ -20,7 +20,7 @@
             "file_name": "_main.raw.wav"
         },
         "audio_sub": {
-            "device": "Azure Kinect 4K Camera",
+            "device": "Azure Kinect",
             "id": 1,
             "sample_rate": 16000,
             "channels": 1,
