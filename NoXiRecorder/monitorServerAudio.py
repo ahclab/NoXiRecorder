@@ -47,6 +47,8 @@ if __name__ == "__main__":
     server.setsockopt(
         socket.SOL_SOCKET, socket.SO_REUSEADDR, 1
     )  # Address already in use error avoidance
+    print(f"IP: {IP_AUDIO}")
+    print(f"PORT: {PORT_AUDIO}")
     server.bind((IP_AUDIO, PORT_AUDIO))  # Server start-up
     print("[bold magenta]waiting for a connection request...[/bold magenta]")
     server.listen()  # Waiting for client request
@@ -54,7 +56,7 @@ if __name__ == "__main__":
     print(f"[white]{client}[/white]")
 
     if os.name == "nt":  # Windows
-        audio_device_id = audio_id
+        audio_device_id = get_audio_id(audio_device)
     else:
         audio_device_id = get_audio_id(audio_device)
 

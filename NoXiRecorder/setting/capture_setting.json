@@ -1,7 +1,7 @@
 {
     "capture": {
-        "device": "Logitech StreamCam",
-        "id": 0,
+        "device": "c922 Pro Stream Webcam",
+        "id": 2,
         "fps": 30,
         "frame_size": [
             1920,

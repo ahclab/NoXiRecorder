@@ -2,8 +2,8 @@
     "AVrecordeR": {
         "recording_location": "Nara",
         "video": {
-            "device": "Logitech StreamCam",
-            "id": 0,
+            "device": "Azure Kinect 4K Camera",
+            "id": 1,
             "fps": 25,
             "frame_size": [
                 1920,
@@ -12,7 +12,7 @@
             "file_name": ".raw.mp4"
         },
         "audio_main": {
-            "device": "Yamaha AG03MK2",
+            "device": "US-2x2HR",
             "id": 1,
             "sample_rate": 16000,
             "channels": 1,
@@ -20,7 +20,7 @@
             "file_name": "_main.raw.wav"
         },
         "audio_sub": {
-            "device": "Logitech StreamCam",
+            "device": "Azure Kinect 4K Camera",
             "id": 1,
             "sample_rate": 16000,
             "channels": 1,

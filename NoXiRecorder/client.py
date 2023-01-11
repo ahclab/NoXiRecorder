@@ -11,6 +11,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # init
+    flag = {"expert": False, "novice": False}
     client = {}
     with open(args.setting_path) as f:
         setting = json.load(f)
@@ -18,28 +19,58 @@ if __name__ == "__main__":
         client["novice"] = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         BUFSIZE = setting["record"]["bufsize"]
         for user in ["novice", "expert"]:
-            print(setting["record"][user]["ip"])
+            IP = setting["record"][user]["ip"]
+            PORT = setting["record"][user]["port"]
+            print(f"USER: {user}")
+            print(f"IP: {IP}")
+            print(f"PORT: {PORT}")
             try:
                 client[user].connect(
-                    (setting["record"][user]["ip"],
-                     setting["record"][user]["port"])
+                    (IP,
+                     PORT)
                 )
+                flag[user] = True
             except:
                 print(f"Unable to connect ({user})")
                 # sys.exit()
 
-    while True:
-        msg = input(">>")
-        client["expert"].sendall(msg.encode("utf-8"))
-        client["novice"].sendall(msg.encode("utf-8"))
+    if flag["expert"] == False & flag["novice"] == False:
+        print("Unable to connect to server")
+        exit(1)
 
-        data = client["expert"].recv(BUFSIZE)
-        print(data.decode("UTF-8"))
-        data = client["novice"].recv(BUFSIZE)
-        print(data.decode("UTF-8"))
+    if (flag["expert"] == True & flag["novice"] == True):
+        while True:
+            msg = input(">>")
+            client["expert"].sendall(msg.encode("utf-8"))
+            client["novice"].sendall(msg.encode("utf-8"))
 
-        if msg == "exit":
-            break
+            data = client["expert"].recv(BUFSIZE)
+            print(data.decode("UTF-8"))
+            data = client["novice"].recv(BUFSIZE)
+            print(data.decode("UTF-8"))
+
+            if msg == "exit":
+                break
+    elif (flag["expert"] == True):
+        while True:
+            msg = input(">>")
+            client["expert"].sendall(msg.encode("utf-8"))
+
+            data = client["expert"].recv(BUFSIZE)
+            print(data.decode("UTF-8"))
+
+            if msg == "exit":
+                break
+    elif (flag["novice"] == True):
+        while True:
+            msg = input(">>")
+            client["novice"].sendall(msg.encode("utf-8"))
+
+            data = client["novice"].recv(BUFSIZE)
+            print(data.decode("UTF-8"))
+
+            if msg == "exit":
+                break
 
     time.sleep(2)
     client["expert"].close()

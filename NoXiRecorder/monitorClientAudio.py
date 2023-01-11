@@ -33,11 +33,15 @@ if __name__ == "__main__":
         setting = json.load(f)
         BUFSIZE = setting["monitor"]["bufsize"]
         client_audio = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        IP = setting["monitor"][args.monitor_user]["audio"]["ip"]
+        PORT = setting["monitor"][args.monitor_user]["audio"]["port"]
+        print(f"IP: {IP}")
+        print(f"PORT: {PORT}")
         try:
             client_audio.connect(
                 (
-                    setting["monitor"][args.monitor_user]["audio"]["ip"],
-                    setting["monitor"][args.monitor_user]["audio"]["port"],
+                    IP,
+                    PORT,
                 )
             )
         except:

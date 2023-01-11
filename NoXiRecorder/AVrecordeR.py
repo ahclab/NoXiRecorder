@@ -136,6 +136,7 @@ if __name__ == "__main__":
         path + audio_file_name_sub
     )  # ex.) "Nara/01_2022_12_31/01_expert_kinect.raw.wav"
     path_log = path + ".log"  # ex.) "Nara/01_2022_12_31/01_expert.log"
+    path_img = path + ".png"  # ex.) "Nara/01_2022_12_31/01_expert.png"
 
     file_manager(path_video)  # Delete when file already exists
     file_manager(path_audio_main)  # Delete when file already exists
@@ -149,17 +150,17 @@ if __name__ == "__main__":
     logger.info("Get device number")
     if os.name == "nt":  # Windows
         video_device_id = video_id
-        audio_device_id_main = audio_id_main
-        audio_device_id_sub = audio_id_sub
+        audio_device_id_main = get_audio_id(audio_device_main)
+        audio_device_id_sub = get_audio_id(audio_device_sub)
     else:
         video_device_id = get_camera_id(video_device)
         audio_device_id_main = get_audio_id(audio_device_main)
         audio_device_id_sub = get_audio_id(audio_device_sub)
 
-    logger.debug(f"Video Device: [{video_device_id}]{video_device}")
-    logger.debug(
+    logger.info(f"Video Device: [{video_device_id}]{video_device}")
+    logger.info(
         f"Audio Device (MAIN): [{audio_device_id_main}]{audio_device_main}")
-    logger.debug(
+    logger.info(
         f"Audio Device (SUB): [{audio_device_id_sub}]{audio_device_sub}")
 
     if video_device_id == None:
@@ -175,6 +176,14 @@ if __name__ == "__main__":
         logger.error(f"ERROR: Device not found ({audio_device_sub})")
         # exit(1)
     logger.debug("Successfully obtained device number")
+
+    # Device Verification
+    cap = cv2.VideoCapture(video_device_id)
+    ret, frame = cap.read()
+    cv2.imwrite(path_img, frame)
+    cap.release()
+    cv2.destroyAllWindows()
+    logger.debug(f"Saving Images: {path_img}")
 
     # Recording
     logger.info("AV Record Start...")

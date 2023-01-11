@@ -30,6 +30,8 @@ if __name__ == "__main__":
     server.setsockopt(
         socket.SOL_SOCKET, socket.SO_REUSEADDR, 1
     )  # Address already in use error avoidance
+    print(f"IP: {IP}")
+    print(f"PORT: {PORT}")
     server.bind((IP, PORT))  # Server start-up
     print("[bold magenta]waiting for a connection request...[/bold magenta]")
     server.listen()  # Waiting for client request
