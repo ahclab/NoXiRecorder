@@ -1,14 +1,15 @@
-import cv2
-import os
-import numpy as np
-import argparse
-import time
-import socket
-from rich import print
-import pyaudio
-import json
-from NoXiRecorder.utils.getDeviceID import get_audio_id, get_camera_id
 from NoXiRecorder.monitor.monitor import VideoSend
+from NoXiRecorder.utils.getDeviceID import get_audio_id, get_camera_id
+import json
+import pyaudio
+from rich import print
+import socket
+import time
+import argparse
+import numpy as np
+import os
+os.environ["OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"] = "0"
+import cv2
 
 
 if __name__ == "__main__":
@@ -38,8 +39,8 @@ if __name__ == "__main__":
 
     with open(args.network_setting_path) as f:
         setting = json.load(f)
-        IP_VIDEO = setting["monitor"][user]["video"]["ip"]
-        PORT_VIDEO = setting["monitor"][user]["video"]["port"]
+        IP_VIDEO = setting["monitor"][user]["video_to_observer"]["ip"]
+        PORT_VIDEO = setting["monitor"][user]["video_to_observer"]["port"]
 
     # Server startup and standby
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

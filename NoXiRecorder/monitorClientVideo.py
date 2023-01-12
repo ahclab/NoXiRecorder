@@ -2,7 +2,7 @@ import socket
 import sys
 import time
 import numpy as np
-import cv2
+import os
 import pyaudio
 import argparse
 import json
@@ -10,6 +10,9 @@ import threading
 import NoXiRecorder.utils.utils as utils
 
 from NoXiRecorder.monitor.monitor import VideoMonitor
+
+os.environ["OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"] = "0"
+import cv2
 
 
 if __name__ == "__main__":
@@ -31,8 +34,8 @@ if __name__ == "__main__":
         setting = json.load(f)
         BUFSIZE = setting["monitor"]["bufsize"]
         client_video = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        IP = setting["monitor"][args.monitor_user]["video"]["ip"]
-        PORT = setting["monitor"][args.monitor_user]["video"]["port"]
+        IP = setting["monitor"][args.monitor_user]["video_to_observer"]["ip"]
+        PORT = setting["monitor"][args.monitor_user]["video_to_observer"]["port"]
         print(f"IP: {IP}")
         print(f"PORT: {PORT}")
         try:

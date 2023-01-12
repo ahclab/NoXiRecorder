@@ -21,6 +21,9 @@ if __name__ == "__main__":
     parser.add_argument(
         "--network_setting_path", default="NoXiRecorder/setting/network_setting.json"
     )
+    parser.add_argument(
+        "--to_user", default="observer"
+    )
     args = parser.parse_args()
 
     # init
@@ -39,8 +42,18 @@ if __name__ == "__main__":
 
     with open(args.network_setting_path) as f:
         setting = json.load(f)
-        IP_AUDIO = setting["monitor"][user]["audio"]["ip"]
-        PORT_AUDIO = setting["monitor"][user]["audio"]["port"]
+        if args.to_user == "observer":
+            IP_AUDIO = setting["monitor"][user]["audio_to_observer"]["ip"]
+            PORT_AUDIO = setting["monitor"][user]["audio_to_observer"]["port"]
+        elif user == "novice" & args.to_user == "expert":
+            IP_AUDIO = setting["monitor"][user]["audio_to_expert"]["ip"]
+            PORT_AUDIO = setting["monitor"][user]["audio_to_expert"]["port"]
+        elif user == "expert" & args.to_user == "novice":
+            IP_AUDIO = setting["monitor"][user]["audio_to_novice"]["ip"]
+            PORT_AUDIO = setting["monitor"][user]["audio_to_novice"]["port"]
+        else:
+            print(f"Error: Inconsistency between --to_user {args.to_user} and user {user}")
+            exit(1)
 
     # Server startup and standby
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

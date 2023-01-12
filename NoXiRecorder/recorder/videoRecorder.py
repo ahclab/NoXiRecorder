@@ -1,4 +1,3 @@
-import cv2
 import threading
 import time
 import os
@@ -7,6 +6,9 @@ import ffmpeg
 import datetime
 import NoXiRecorder.utils.utils as utils
 from NoXiRecorder.utils.utils import file_manager
+
+os.environ["OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"] = "0"
+import cv2
 
 # Video record
 
