@@ -55,10 +55,7 @@ if __name__ == "__main__":
     client, _ = server.accept()
     print(f"[white]{client}[/white]")
 
-    if os.name == "nt":  # Windows
-        video_device_id = video_id
-    else:
-        video_device_id = get_camera_id(video_device)
+    video_device_id = get_camera_id(video_device)
 
     if video_device_id == None:
         video_device_id = video_id

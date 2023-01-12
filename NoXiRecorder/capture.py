@@ -69,10 +69,7 @@ if __name__ == "__main__":
         fps = setting["capture"]["fps"]
         frame_size = setting["capture"]["frame_size"]
 
-    if os.name == "nt":  # Windows
-        video_device_id = device_id
-    else:
-        video_device_id = get_camera_id(video_device)
+    video_device_id = get_camera_id(video_device)
 
     if video_device_id == None:
         print(f"ERROR: Device not found ({video_device})")

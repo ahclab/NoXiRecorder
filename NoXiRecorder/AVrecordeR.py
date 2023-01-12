@@ -150,14 +150,9 @@ if __name__ == "__main__":
 
     # Get device number
     logger.info("Get device number")
-    if os.name == "nt":  # Windows
-        video_device_id = video_id
-        audio_device_id_main = get_audio_id(audio_device_main)
-        audio_device_id_sub = get_audio_id(audio_device_sub)
-    else:
-        video_device_id = get_camera_id(video_device)
-        audio_device_id_main = get_audio_id(audio_device_main)
-        audio_device_id_sub = get_audio_id(audio_device_sub)
+    video_device_id = get_camera_id(video_device)
+    audio_device_id_main = get_audio_id(audio_device_main)
+    audio_device_id_sub = get_audio_id(audio_device_sub)
 
     logger.info(f"Video Device: [{video_device_id}]{video_device}")
     logger.info(

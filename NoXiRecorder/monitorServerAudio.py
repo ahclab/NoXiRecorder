@@ -68,10 +68,7 @@ if __name__ == "__main__":
     client, _ = server.accept()
     print(f"[white]{client}[/white]")
 
-    if os.name == "nt":  # Windows
-        audio_device_id = get_audio_id(audio_device)
-    else:
-        audio_device_id = get_audio_id(audio_device)
+    audio_device_id = get_audio_id(audio_device)
 
     if audio_device_id == None:
         audio_device_id = audio_id
