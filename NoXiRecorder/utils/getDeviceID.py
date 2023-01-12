@@ -38,7 +38,7 @@ def AV_info():
 def get_audio_id(name: str) -> Optional[int]:
     pa = pyaudio.PyAudio()
     for i in range(pa.get_device_count()):
-        if name == pa.get_device_info_by_index(i)["name"]:
+        if name in pa.get_device_info_by_index(i)["name"]:
             return i
     return None
 
