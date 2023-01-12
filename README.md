@@ -1,6 +1,6 @@
 # NoXiRecorder
 
-## Operating environment
+## Environment
 * **Macbook Air (M1, 2020)**
   - macOS Monterey 12.5.1
   - Apple M1
@@ -50,8 +50,8 @@ python NoXiRecorder/capture.py
 ```
 To end capture, press "e" on the capture screen.  
 
-### Recorder
-#### Recording on a Single PC
+### Audio and Video Recording
+If you want to take audio and video on one computer, please run the following program.  
 ##### 1. Expert/Novice PC
 ```bash
 python NoXiRecorder/AVrecorder.py
@@ -63,7 +63,8 @@ If you get "AttributeError: module 'ffmpeg' has no attribute 'input'", please ex
 
 If you get an "Invalid buffer size error", please review the settings file.
 
-#### Synchronized Recording of Two PCs
+### NoXi Database Recordings
+To synchronize two PCs for recording, run the following program  
 ##### 1. Expert/Novice PC
 ```bash
 python NoXiRecorder/server.påy
@@ -86,38 +87,38 @@ python NoXiRecorder/client.py
   - **exit**: Disconnection of communication and program termination
 
 ### Transmission of audio between Expert and Novice
-#### 1. Expert PC
+##### 1. Expert PC
 ```bash
 python NoXiRecorder/monitorServerAudio.py --to_user novice
 ```
 
-#### 2. Novice PC
+##### 2. Novice PC
 ```bash
 python NoXiRecorder/monitorServerAudio.py --to_user expert
 ```
 
-#### 3. Expert PC
+##### 3. Expert PC
 ```bash
 python NoXiRecorder/monitorClientAudio.py --monitor_user novice
 ```
 
-#### 4. Novice PC
+##### 4. Novice PC
 ```bash
 python NoXiRecorder/monitorClientAudio.py --monitor_user expert
 ```
 
 ### Audio Monitoring of Expert/Novice by Observer
-#### 1. Expert PC
+##### 1. Expert PC
 ```bash
 python NoXiRecorder/monitorServerAudio.py --to_user observer
 ```
 
-#### 2. Novice PC
+##### 2. Novice PC
 ```bash
 python NoXiRecorder/monitorServerAudio.py --to_user observer
 ```
 
-#### 2. Observer PC (observer)
+##### 2. Observer PC (observer)
 ```bash
 python NoXiRecorder/monitorClientAudio.py --monitor_user expert
 python NoXiRecorder/monitorClientAudio.py --monitor_user novice
