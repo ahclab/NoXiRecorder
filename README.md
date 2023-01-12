@@ -1,6 +1,6 @@
 # NoXiRecorder
 ![Image 1](img/1_noxi.png)
-* **function **
+* **function**
   - Video and Audio Recording on a Single PC
   - Synchronize Two PCs to Record Video and Audio
   - Capture Webcam Cropped to 480x720
