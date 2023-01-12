@@ -56,7 +56,6 @@ def get_audio_id(name: str) -> Optional[int]:
 
 
 # Returns the index number of the camera device of the argument 'name'
-# Works only on Mac OS
 def get_camera_id(name: str) -> Optional[int]:
     if platform.system() == 'Darwin':  # Mac
         r = subprocess.run(
@@ -72,7 +71,7 @@ def get_camera_id(name: str) -> Optional[int]:
                 return i
         return None
 
-    elif platform.system() == 'Windows':
+    elif platform.system() == 'Windows': # Windows
         device_list = get_device_list_for_windows()
         for i, device in enumerate(device_list):
             if name in device:
