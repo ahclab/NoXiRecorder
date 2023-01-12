@@ -4,6 +4,7 @@ import json
 import pyaudio
 import platform
 import cv2
+import time
 
 # Lists index and name of connected devices
 
@@ -27,14 +28,16 @@ def AV_info():
     else:
         device_list = get_device_list_for_windows()
         for i, device in enumerate(device_list):
-            print(f"[{i}] device")
+            print(f"[{i}] {device}")
 
 def get_device_list_for_windows():
-    r_list = str(subprocess.run(
-            ["ffmpeg", "-list_devices", "true", "-f", "avfoundation", "-i", "dummy"],
+    r = str(subprocess.run(
+            ["ffmpeg", "-list_devices", "true", "-f", "dshow", "-i", "nul"],
             capture_output=True,
             text=True,
-        )).replace(r"\n", "\n").splitlines()
+            encoding="utf-8"
+        ))
+    r_list = r.replace(r"\n", "\n").splitlines()
 
     device_list = []
     for line in r_list:
