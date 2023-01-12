@@ -1,4 +1,11 @@
 # NoXiRecorder
+![Image 1](img/1_noxi.png)
+* **function **
+  - Video and Audio Recording on a Single PC
+  - Synchronize Two PCs to Record Video and Audio
+  - Capture Webcam Cropped to 480x720
+  - Server Sends Microphone Input and Receives It and Loops It Back to the Speaker
+  - Server Sends Webcam and Receives It and Loops It Back to the Speaker
 
 ## Environment
 * **Macbook Air (M1, 2020)**
@@ -44,6 +51,7 @@ Be sure to turn it off.
 
 ## Run
 ### Capture
+![Image 2](img/2_capture.png)
 ##### 1. Expert/Novice PC
 ```bash
 python NoXiRecorder/capture.py
@@ -51,6 +59,7 @@ python NoXiRecorder/capture.py
 To end capture, press "e" on the capture screen.  
 
 ### Audio and Video Recording
+![Image 3](img/3_record_single_pc.png)
 If you want to take audio and video on one computer, please run the following program.  
 ##### 1. Expert/Novice PC
 ```bash
@@ -64,7 +73,8 @@ If you get "AttributeError: module 'ffmpeg' has no attribute 'input'", please ex
 If you get an "Invalid buffer size error", please review the settings file.
 
 ### NoXi Database Recordings
-To synchronize two PCs for recording, run the following program  
+![Image 4](img/4_record_double_pc.png)
+To synchronize two PCs for recording, run the following program.  
 ##### 1. Expert/Novice PC
 ```bash
 python NoXiRecorder/server.påy
@@ -87,6 +97,7 @@ python NoXiRecorder/client.py
   - **exit**: Disconnection of communication and program termination
 
 ### Transmission of audio between Expert and Novice
+![Image 5](img/5_trans_audio.png)
 ##### 1. Expert PC
 ```bash
 python NoXiRecorder/monitorServerAudio.py --to_user novice
@@ -108,6 +119,7 @@ python NoXiRecorder/monitorClientAudio.py --monitor_user expert
 ```
 
 ### Audio Monitoring of Expert/Novice by Observer
+![Image 6](img/6_audio_monitor.png)
 ##### 1. Expert PC
 ```bash
 python NoXiRecorder/monitorServerAudio.py --to_user observer
