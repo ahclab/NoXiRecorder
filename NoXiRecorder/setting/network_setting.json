@@ -13,23 +13,31 @@
     "monitor": {
         "bufsize": 23040,
         "expert": {
-            "video": {
+            "video_to_observer": {
                 "ip": "169.254.189.3",
                 "port": 50003
             },
-            "audio": {
+            "audio_to_novice": {
                 "ip": "169.254.189.3",
                 "port": 50004
+            },
+            "audio_to_observer": {
+                "ip": "169.254.189.3",
+                "port": 50005
             }
         },
         "novice": {
-            "video": {
-                "ip": "169.254.189.4",
-                "port": 50005
-            },
-            "audio": {
+            "video_to_observer": {
                 "ip": "169.254.189.4",
                 "port": 50006
+            },
+            "audio_to_expert": {
+                "ip": "169.254.189.4",
+                "port": 50007
+            },
+            "audio_to_observer": {
+                "ip": "169.254.189.4",
+                "port": 50008
             }
         }
     }

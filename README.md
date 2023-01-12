@@ -1,6 +1,13 @@
 # NoXiRecorder
+![Image 1](img/1_noxi.png)
+* **function **
+  - Video and Audio Recording on a Single PC
+  - Synchronize Two PCs to Record Video and Audio
+  - Capture Webcam Cropped to 480x720
+  - Server Sends Microphone Input and Receives It and Loops It Back to the Speaker
+  - Server Sends Webcam and Receives It and Loops It Back to the Speaker
 
-## Operating environment
+## Environment
 * **Macbook Air (M1, 2020)**
   - macOS Monterey 12.5.1
   - Apple M1
@@ -44,13 +51,17 @@ Be sure to turn it off.
 
 ## Run
 ### Capture
+![Image 2](img/2_capture.png)
+##### 1. Expert/Novice PC
 ```bash
 python NoXiRecorder/capture.py
 ```
 To end capture, press "e" on the capture screen.  
 
-### Recorder
-#### Recording on a single PC
+### Audio and Video Recording
+![Image 3](img/3_record_single_pc.png)
+If you want to take audio and video on one computer, please run the following program.  
+##### 1. Expert/Novice PC
 ```bash
 python NoXiRecorder/AVrecorder.py
 ```
@@ -61,13 +72,15 @@ If you get "AttributeError: module 'ffmpeg' has no attribute 'input'", please ex
 
 If you get an "Invalid buffer size error", please review the settings file.
 
-#### Synchronized recording of two PCs
-##### Server PC (expert/novice)
+### NoXi Database Recordings
+![Image 4](img/4_record_double_pc.png)
+To synchronize two PCs for recording, run the following program.  
+##### 1. Expert/Novice PC
 ```bash
-python NoXiRecorder/server.py
+python NoXiRecorder/server.påy
 ```
 
-##### Client PC (observer)
+##### 2. Observer PC
 ```bash
 python NoXiRecorder/client.py
 ```
@@ -83,23 +96,57 @@ python NoXiRecorder/client.py
   - **end**: End of recording
   - **exit**: Disconnection of communication and program termination
 
-### Monitor
-#### 1. Server PC (expert)
+### Transmission of audio between Expert and Novice
+![Image 5](img/5_trans_audio.png)
+##### 1. Expert PC
 ```bash
-python NoXiRecorder/monitorServerAudio.py
-python NoXiRecorder/monitorServerVideo.py
+python NoXiRecorder/monitorServerAudio.py --to_user novice
 ```
 
-#### 2. Server PC (novice)
+##### 2. Novice PC
 ```bash
-python NoXiRecorder/monitorServerAudio.py
-python NoXiRecorder/monitorServerVideo.py
+python NoXiRecorder/monitorServerAudio.py --to_user expert
 ```
 
-#### 2. Client PC (observer)
+##### 3. Expert PC
+```bash
+python NoXiRecorder/monitorClientAudio.py --monitor_user novice
+```
+
+##### 4. Novice PC
 ```bash
 python NoXiRecorder/monitorClientAudio.py --monitor_user expert
-python NoXiRecorder/monitorClientVideo.py --monitor_user expert
-python NoXiRecorder/monitorClientAudio.py --monitor_user novice
-python NoXiRecorder/monitorClientVideo.py --monitor_user novice
 ```
+
+### Audio Monitoring of Expert/Novice by Observer
+![Image 6](img/6_audio_monitor.png)
+##### 1. Expert PC
+```bash
+python NoXiRecorder/monitorServerAudio.py --to_user observer
+```
+
+##### 2. Novice PC
+```bash
+python NoXiRecorder/monitorServerAudio.py --to_user observer
+```
+
+##### 2. Observer PC (observer)
+```bash
+python NoXiRecorder/monitorClientAudio.py --monitor_user expert
+python NoXiRecorder/monitorClientAudio.py --monitor_user novice
+```
+
+## Tips
+Since you will have multiple terminal windows open, we recommend installing the following terminal applications.  
+* **Windows**
+  1. Installation of WindowsTerminal (https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701?hl=ja-jp&gl=jp&icid=TopNavWindowsApps)
+  2. Using Anaconda Python with PowerShell (https://helve-blog.com/posts/python/powershell-anaconda-python/)
+* **Mac OS**
+  1. Installation of Iterm2 (https://iterm2.com)
+  
+For monitoring of Expert and Novice by observers, it is recommended that a screen sharing application be used in conjunction.  
+Chrome Remote Desktop, which is OS-independent, is the easiest.  
+* **Remote Desktop**
+  1. Installation of Chrome Remote Desktop (https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwj_gIDyl8H8AhWprlYBHVS_DNkQFnoECBIQAQ&url=https%3A%2F%2Fremotedesktop.google.com%2F%3Fhl%3Dja&usg=AOvVaw0eAhneSA3hLZ5kRRLHbGUr)
+  2. Set up a server (Expert/Novice)
+  3. Set up a client (Observer)

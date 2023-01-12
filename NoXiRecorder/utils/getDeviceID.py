@@ -25,13 +25,22 @@ def AV_info():
         for i, camera in enumerate(d.get("SPCameraDataType", [])):
             print(f"Index[{i}], Device: {camera['_name']}")
     else:
-        for i in range(0, 10):
-            cap1 = cv2.VideoCapture(i, cv2.CAP_DSHOW)
-            if cap1.isOpened():
-                print(f"VideoCapture({i}): Found")
-            else:
-                print(f"VideoCapture({i}): None")
-            cap1.release()
+        device_list = get_device_list_for_windows()
+        for i, device in enumerate(device_list):
+            print(f"[{i}] device")
+
+def get_device_list_for_windows():
+    r_list = str(subprocess.run(
+            ["ffmpeg", "-list_devices", "true", "-f", "avfoundation", "-i", "dummy"],
+            capture_output=True,
+            text=True,
+        )).replace(r"\n", "\n").splitlines()
+
+    device_list = []
+    for line in r_list:
+        if "(video)" in line:
+            device_list.append(line)
+    return device_list
 
 
 # Returns the index number of the audio device of the argument 'name'
@@ -46,18 +55,30 @@ def get_audio_id(name: str) -> Optional[int]:
 # Returns the index number of the camera device of the argument 'name'
 # Works only on Mac OS
 def get_camera_id(name: str) -> Optional[int]:
-    r = subprocess.run(
-        ["system_profiler", "SPCameraDataType", "-json"],
-        capture_output=True,
-        text=True,
-    )
-    if r.returncode != 0:
+    if platform.system() == 'Darwin':  # Mac
+        r = subprocess.run(
+            ["system_profiler", "SPCameraDataType", "-json"],
+            capture_output=True,
+            text=True,
+        )
+        if r.returncode != 0:
+            return None
+        d = json.loads(r.stdout)
+        for i, camera in enumerate(d.get("SPCameraDataType", [])):
+            if name in camera["_name"]:
+                return i
         return None
-    d = json.loads(r.stdout)
-    for i, camera in enumerate(d.get("SPCameraDataType", [])):
-        if name == camera["_name"]:
-            return i
-    return None
+
+    elif platform.system() == 'Windows':
+        device_list = get_device_list_for_windows()
+        for i, device in enumerate(device_list):
+            if name in device:
+                return i
+        return None
+    
+    else:
+        return None
+
 
 
 if __name__ == "__main__":

@@ -1,4 +1,3 @@
-import cv2
 import wave
 import time
 import os
@@ -16,6 +15,9 @@ from NoXiRecorder.recorder.videoRecorder import VideoRecorder
 from NoXiRecorder.recorder.audioRecorder import AudioRecorder
 import NoXiRecorder.utils.utils as utils
 from NoXiRecorder.utils.utils import file_manager
+
+os.environ["OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"] = "0"
+import cv2
 
 # Displays information on recorded files
 

@@ -1,4 +1,3 @@
-import cv2
 import os
 import numpy as np
 import argparse
@@ -9,6 +8,9 @@ import pyaudio
 import json
 import threading
 import NoXiRecorder.utils.utils as utils
+
+os.environ["OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"] = "0"
+import cv2
 
 
 class VideoSend:

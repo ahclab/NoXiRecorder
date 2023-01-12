@@ -1,9 +1,11 @@
-import cv2
 import os
 import numpy as np
 import argparse
 from NoXiRecorder.utils.getDeviceID import get_camera_id
 import json
+
+os.environ["OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"] = "0"
+import cv2
 
 
 class VideoShow:
