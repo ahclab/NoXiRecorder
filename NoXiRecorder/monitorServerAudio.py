@@ -64,7 +64,10 @@ if __name__ == "__main__":
     print(f"PORT: {PORT_AUDIO}")
     server.bind((IP_AUDIO, PORT_AUDIO))  # Server start-up
     print("[bold magenta]waiting for a connection request...[/bold magenta]")
-    server.listen()  # Waiting for client request
+    try:
+        server.listen()  # Waiting for client request
+    except:
+        exit(1)
     client, _ = server.accept()
     print(f"[white]{client}[/white]")
 
