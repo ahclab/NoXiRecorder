@@ -42,10 +42,10 @@ if __name__ == "__main__":
         if user == "observer":
             IP = setting["monitor"][args.monitor_user]["audio_to_observer"]["ip"]
             PORT = setting["monitor"][args.monitor_user]["audio_to_observer"]["port"]
-        elif user == "expert" && args.monitor_user == "novice":
+        elif (user == "expert") & (args.monitor_user == "novice"):
             IP = setting["monitor"][args.monitor_user]["audio_to_expert"]["ip"]
             PORT = setting["monitor"][args.monitor_user]["audio_to_expert"]["port"]
-        elif user == "novice" && args.monitor_user == "expert":
+        elif (user == "novice") & (args.monitor_user == "expert"):
             IP = setting["monitor"][args.monitor_user]["audio_to_novice"]["ip"]
             PORT = setting["monitor"][args.monitor_user]["audio_to_novice"]["port"]
         else:

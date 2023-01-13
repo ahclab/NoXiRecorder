@@ -45,10 +45,10 @@ if __name__ == "__main__":
         if args.to_user == "observer":
             IP_AUDIO = setting["monitor"][user]["audio_to_observer"]["ip"]
             PORT_AUDIO = setting["monitor"][user]["audio_to_observer"]["port"]
-        elif user == "novice" & args.to_user == "expert":
+        elif (user == "novice") & (args.to_user == "expert"):
             IP_AUDIO = setting["monitor"][user]["audio_to_expert"]["ip"]
             PORT_AUDIO = setting["monitor"][user]["audio_to_expert"]["port"]
-        elif user == "expert" & args.to_user == "novice":
+        elif (user == "expert") & (args.to_user == "novice"):
             IP_AUDIO = setting["monitor"][user]["audio_to_novice"]["ip"]
             PORT_AUDIO = setting["monitor"][user]["audio_to_novice"]["port"]
         else:
