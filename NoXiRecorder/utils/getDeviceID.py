@@ -25,10 +25,25 @@ def AV_info():
         d = json.loads(r.stdout)
         for i, camera in enumerate(d.get("SPCameraDataType", [])):
             print(f"Index[{i}], Device: {camera['_name']}")
-    else:
+    elif platform.system() == 'Windows': # Windows:
         device_list = get_device_list_for_windows()
-        for i, device in enumerate(device_list):
-            print(f"[{i}] {device}")
+        print(device_list)
+        for i in range(0, 20): 
+            cap = cv2.VideoCapture(i)
+            if cap.isOpened(): 
+                ret, frame = cap.read()
+                cv2.imwrite(f"NoXiRecorder/utils/video_device_img/{i}.png", frame)
+            else:
+                pass
+            cap.release()
+            cv2.destroyAllWindows()
+        video_devce_dict = {}
+        for device_name in device_list:
+            device_id = input(f"Device Name [{device_name}]: Device ID >>")
+            video_devce_dict[device_name] = device_id
+        print(device_name)
+    else:
+        pass
 
 def get_device_list_for_windows():
     r = str(subprocess.run(
@@ -39,11 +54,11 @@ def get_device_list_for_windows():
         ))
     r_list = r.replace(r"\n", "\n").splitlines()
 
-    device_list = []
+    device_name_list = []
     for line in r_list:
         if "(video)" in line:
-            device_list.append(line)
-    return device_list
+            device_name_list.append(re.findall(r'\".*\"', line))
+    return device_name_list
 
 
 # Returns the index number of the audio device of the argument 'name'
@@ -72,8 +87,9 @@ def get_camera_id(name: str) -> Optional[int]:
         return None
 
     elif platform.system() == 'Windows': # Windows
-        device_list = get_device_list_for_windows()
-        for i, device in enumerate(device_list):
+        with open("NoXiRecorder/setting/video_device.json") as f:
+            device_list = json.load(f)
+        for i, device in device_list.items():
             if name in device:
                 return i
         return None
