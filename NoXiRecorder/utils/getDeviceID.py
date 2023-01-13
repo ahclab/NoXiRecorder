@@ -47,6 +47,7 @@ def AV_info():
             cv2.destroyAllWindows()
         video_devce_dict = {}
         for device_name in device_list:
+            device_name = "".join(device_name)
             device_id = input(f"Device Name [{device_name}]: Device ID >>")
             video_devce_dict[str(device_name)] = device_id
         print(video_devce_dict)
