@@ -1,3 +1,6 @@
 {
-    "0": "hoge"
+ "['Azure Kinect 4K Camera']": "1",
+ "['c922 Pro Stream Webcam']": "2",
+ "['Integrated Webcam']": "0",
+ "['OBS Virtual Camera']": "3"
 }
