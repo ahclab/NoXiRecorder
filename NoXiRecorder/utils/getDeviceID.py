@@ -3,6 +3,8 @@ from typing import Optional
 import json
 import pyaudio
 import platform
+import os
+os.environ["OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"] = "0"
 import cv2
 import time
 import re
