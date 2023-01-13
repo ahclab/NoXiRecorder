@@ -73,6 +73,9 @@ if __name__ == "__main__":
     if audio_device_id == None:
         audio_device_id = audio_id
         print(f"ERROR: Device not found ({audio_device})")
+    
+    print(
+        f"Audio Device: [{audio_device_id}]{audio_device}")
 
     print("------------------------------------")
     print("Monitor Start...")
