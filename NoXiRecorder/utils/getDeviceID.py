@@ -9,6 +9,8 @@ import cv2
 import time
 import re
 
+OUTPUT_DIR =  "NoXiRecorder/utils/video_device_img"
+
 # Lists index and name of connected devices
 
 
@@ -31,11 +33,14 @@ def AV_info():
     elif platform.system() == 'Windows': # Windows:
         device_list = get_device_list_for_windows()
         print(device_list)
+        os.makedirs(OUTPUT_DIR, exist_ok=True)
+        for f in os.listdir(OUTPUT_DIR):
+            os.remove(os.path.join(OUTPUT_DIR, f))
         for i in range(0, 20): 
             cap = cv2.VideoCapture(i)
             if cap.isOpened(): 
                 ret, frame = cap.read()
-                cv2.imwrite(f"NoXiRecorder/utils/video_device/{i}.png", frame)
+                cv2.imwrite(os.path.join(OUTPUT_DIR, f"{i}.png"), frame)
             else:
                 pass
             cap.release()
@@ -60,7 +65,7 @@ def get_device_list_for_windows():
     device_name_list = []
     for line in r_list:
         if "(video)" in line:
-            device_name_list.append(re.findall(r'\".*\"', line))
+            device_name_list.append(re.findall(r'\"(.*)\"', line))
     return device_name_list
 
 
