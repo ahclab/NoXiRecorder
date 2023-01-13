@@ -5,6 +5,7 @@ import pyaudio
 import platform
 import cv2
 import time
+import re
 
 # Lists index and name of connected devices
 
