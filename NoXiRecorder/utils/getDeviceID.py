@@ -35,7 +35,7 @@ def AV_info():
             cap = cv2.VideoCapture(i)
             if cap.isOpened(): 
                 ret, frame = cap.read()
-                cv2.imwrite(f"NoXiRecorder/utils/video_device_img/{i}.png", frame)
+                cv2.imwrite(f"NoXiRecorder/utils/video_device/{i}.png", frame)
             else:
                 pass
             cap.release()
@@ -43,7 +43,7 @@ def AV_info():
         video_devce_dict = {}
         for device_name in device_list:
             device_id = input(f"Device Name [{device_name}]: Device ID >>")
-            video_devce_dict[device_name] = device_id
+            video_devce_dict[str(device_name)] = device_id
         print(device_name)
     else:
         pass
