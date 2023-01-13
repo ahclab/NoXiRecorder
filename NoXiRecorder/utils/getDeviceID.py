@@ -49,7 +49,7 @@ def AV_info():
         for device_name in device_list:
             device_name = "".join(device_name)
             device_id = input(f"Device Name [{device_name}]: Device ID >>")
-            video_devce_dict[str(device_name)] = device_id
+            video_devce_dict[device_name] = int(device_id)
         print(video_devce_dict)
         with open('NoXiRecorder/setting/video_device.json', 'w') as f:
             json.dump(video_devce_dict, f, indent=1)
@@ -100,9 +100,9 @@ def get_camera_id(name: str) -> Optional[int]:
     elif platform.system() == 'Windows': # Windows
         with open("NoXiRecorder/setting/video_device.json") as f:
             device_dict = json.load(f)
-        for i, device in device_dict.items():
+        for device, index in device_dict.items():
             if name in device:
-                return i
+                return index
         return None
     
     else:
