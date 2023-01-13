@@ -9,7 +9,7 @@ import cv2
 import time
 import re
 
-OUTPUT_DIR =  "NoXiRecorder/utils/video_device_img"
+OUTPUT_DIR = "NoXiRecorder/utils/video_device_img"
 
 # Lists index and name of connected devices
 

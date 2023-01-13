@@ -36,13 +36,26 @@
   * Install repo: `pip install -e .`
 
 ## Setup
+### Get json of video device (!Windows Only!)
+##### 1. Execute program
+```bash
+python NoXiRecorder/utils/getDeviceID.py
+```
+
+##### 2. Enter device ID from image
+Enter the device ID referring to the image stored in **NoXiRecorder/utils/video_device_img**.
+
+##### 3. Check the output json
+VIDEO DEVICE JSON: **NoXiRecorder/setting/video_device.json**  
+  
+This must be done every time a device is made to connect.
+
 ### Edit the settings file (NoXiRecorder/setting/...)
 The main variables that need editing are listed below
   - **user**: Select the role of the computer to be used from "**expert**", "**novice**", "**observer**".
   - **device**: Enter the name of the equipment to be used for the recording
-This is only valid for macOS and will not work on Windows due to system reasons.
   - **id**: Enter the device ID used for recording.
-This ID will be used if the device name is not found or if Windows is used.
+This ID will be used if the device name is not found.
   - **ip**: Please enter ip address for server.
 
 ### Allow network traffic for security software
