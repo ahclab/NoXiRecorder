@@ -1,8 +1,10 @@
-import os
-import numpy as np
 import argparse
-from NoXiRecorder.utils.getDeviceID import get_camera_id
 import json
+import os
+
+import numpy as np
+
+from NoXiRecorder.utils.getDeviceID import get_camera_id
 
 os.environ["OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"] = "0"
 import cv2
@@ -25,14 +27,16 @@ class VideoShow:
 
     # Video starts being captured
     def capture(self):
-        x, y = 720, 180
-        h, w = 720, 480
+        h, w = 1080, 720
+        # h, w = 720, 480
+        output_frame_size_h, output_frame_size_w = h, int((h/self.frameSize[1])*self.frameSize[0])
+        x, y = int((output_frame_size_w - w)/2), int((output_frame_size_h - h)/2)
         while self.open == True:
             ret, video_frame = self.video_cap.read()
             if ret == True:
-                blank = np.zeros((720, 1280, 3), np.uint8)
+                blank = np.zeros((output_frame_size_h, output_frame_size_w, 3), np.uint8)
                 frame = video_frame[y: y + h, x: x + w]
-                blank[0:720, 400:880] = frame
+                blank[y: y + h, x: x + w] = frame
                 frame = cv2.flip(blank, 1)
                 cv2.imshow("screen", frame)
                 if cv2.waitKey(1) & 0xFF == ord("e"):

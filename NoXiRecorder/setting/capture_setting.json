@@ -1,7 +1,7 @@
 {
     "capture": {
-        "device": "C922 Pro Stream Webcam",
-        "id": 2,
+        "device": "c922 Pro Stream Webcam",
+        "id": 1,
         "fps": 30,
         "frame_size": [
             1920,
