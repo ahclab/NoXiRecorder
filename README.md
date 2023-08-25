@@ -90,7 +90,7 @@ If you get an "Invalid buffer size error", please review the settings file.
 To synchronize two PCs for recording, run the following program.  
 ##### 1. Expert/Novice PC
 ```bash
-python NoXiRecorder/server.påy
+python NoXiRecorder/server.py
 ```
 
 ##### 2. Observer PC
